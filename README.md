@@ -9,6 +9,7 @@ Usage
 Simple Usage:
 
 	// Create a new EventQ, with default options
+	var EventQ = require('eventq');
 	var q = new EventQ();
 	items.forEach(function(item){
 		// Add to our counter

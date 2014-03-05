@@ -25,7 +25,7 @@
  *
  */
 
-/* global require, exports */
+/* global require, module */
 
 var events = require('events');
 var util = require('util');
@@ -77,5 +77,5 @@ EventQ.prototype.done = function eventQ_done(){
 };
 
 
-exports.EventQ = EventQ;
+module.exports = EventQ;
  
