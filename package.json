@@ -1,6 +1,6 @@
 {
 	"author": "Chris Moyer <cmoyer@newstex.com>",
-	"name": "EventQ",
+	"name": "eventq",
 	"description": "A simple EventQ for Node.js",
 	"version": "0.1.0",
 	"main": "index.js",
