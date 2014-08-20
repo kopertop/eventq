@@ -1,15 +1,18 @@
 {
-	"author": "Chris Moyer <cmoyer@newstex.com>",
-	"name": "eventq",
-	"description": "A simple EventQ for Node.js",
-	"version": "0.1.0",
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/kopertop/eventq"
-	},
-	"keywords": [
-		"queue"
-	],
-	"license": "MIT"
+  "author": "Chris Moyer <cmoyer@newstex.com>",
+  "name": "eventq",
+  "description": "A simple EventQ for Node.js",
+  "version": "0.1.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kopertop/eventq"
+  },
+  "keywords": [
+    "queue"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "should": "^4.0.4"
+  }
 }

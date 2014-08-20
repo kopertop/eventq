@@ -12,14 +12,16 @@
  *     q.add();
  *     my_async_function_with_callback(item, function(){
  *       // Pop one off our counter
- *       q.done();
+ *       // "val" is optional, and lets you return something
+ *       // to the "ready" handler
+ *       q.done(val);
  *     });
  *   });
  *
  *
  *
  *
- *   q.on('ready', function(){
+ *   q.on('ready', function(vals){
  *     console.log('Ready!');
  *   });
  *
@@ -41,10 +43,11 @@ function EventQ(count, max_wait_time){
 	var self = this;
 	events.EventEmitter.call(this);
 	self.counter = count || 0;
+	self.vals = [];
 	if(max_wait_time){
 		self.timeout = setTimeout(function eventQTimeout(){
 			self.counter = null;
-			self.emit('ready');
+			self.emit('ready', self.vals);
 		}, max_wait_time);
 	}
 }
@@ -63,16 +66,20 @@ EventQ.prototype.add = function eventQ_add(){
 /**
  * Delete one from our counter
  */
-EventQ.prototype.done = function eventQ_done(){
+EventQ.prototype.done = function eventQ_done(val){
 	// If we've disabled the counter, it's because we've already fired
 	if(this.counter === null){
 		return;
 	}
 	this.counter--;
+	// Add this value if it is not undefined
+	if (val !== undefined){
+		this.vals.push(val);
+	}
 	// If we're at zero, fire the ready event
 	if(this.counter <= 0){
 		this.counter = null;
-		this.emit('ready');
+		this.emit('ready', this.vals);
 	}
 };
 
