@@ -1,0 +1,33 @@
+{
+  "bitwise": true,
+  "browser": true,
+  "curly": true,
+  "devel": false,
+  "eqeqeq": true,
+  "expr": true,
+  "globals": {            // Test-specific globals
+    "after": false,
+    "afterEach": false,
+    "angular": false,
+    "before": false,
+    "beforeEach": false,
+    "browser": false,
+    "describe": false,
+    "inject": false,
+    "it": false,
+    "chai": false,
+    "sinon": false
+  },
+  "immed": true,
+  "indent": 4,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "nonew": true,
+  "node": true,
+  "regexp": true,
+  "smarttabs": true,
+  "strict": true,
+  "trailing": true,
+  "undef": true
+}
