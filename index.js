@@ -26,8 +26,7 @@
  *   });
  *
  */
-
-/* global require, module */
+'use strict';
 
 var events = require('events');
 var util = require('util');
@@ -46,8 +45,10 @@ function EventQ(count, max_wait_time){
 	self.vals = [];
 	if(max_wait_time){
 		self.timeout = setTimeout(function eventQTimeout(){
-			self.counter = null;
-			self.emit('ready', self.vals);
+			if(self.counter !== null){
+				self.counter = null;
+				self.emit('ready', self.vals);
+			}
 		}, max_wait_time);
 	}
 }
