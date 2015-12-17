@@ -18,6 +18,10 @@
  *     });
  *   });
  *
+ *   q.add(function(done){
+ *     // do async task
+ *     done();
+ *   });
  *
  *
  *
@@ -57,10 +61,26 @@ util.inherits(EventQ, events.EventEmitter);
 /**
  * Add one to our counter
  */
-EventQ.prototype.add = function eventQ_add(){
+EventQ.prototype.add = function eventQ_add(fnc){
 	// Only add to the counter if we haven't set it to disabled
 	if(this.counter !== null){
 		this.counter++;
+	}
+	// Allow passing in a function to be run asynchronously
+	if(fnc){
+		var self = this;
+		// Only allow the "completed" function to fire once
+		var completed = false;
+		function complete(val){
+			if(!completed){
+				completed = true;
+				self.done(val);
+			} else {
+				console.warn('WARNING: Completion event fired multiple times');
+			}
+		}
+		// Fire this asynchronously
+		setImmediate(fnc, complete);
 	}
 };
 
