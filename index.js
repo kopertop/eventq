@@ -71,16 +71,15 @@ EventQ.prototype.add = function eventQ_add(fnc){
 		var self = this;
 		// Only allow the "completed" function to fire once
 		var completed = false;
-		function complete(val){
+		// Fire this asynchronously
+		setImmediate(fnc, function complete(val){
 			if(!completed){
 				completed = true;
 				self.done(val);
 			} else {
 				console.warn('WARNING: Completion event fired multiple times');
 			}
-		}
-		// Fire this asynchronously
-		setImmediate(fnc, complete);
+		});
 	}
 };
 

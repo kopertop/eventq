@@ -2,7 +2,7 @@
   "author": "Chris Moyer <cmoyer@newstex.com>",
   "name": "eventq",
   "description": "A simple EventQ for Node.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": {
     "type": "git",
