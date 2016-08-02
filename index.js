@@ -54,6 +54,7 @@ function EventQ(count, max_wait_time){
 		}, 100);
 	} else if(max_wait_time){
 		self.timeout = setTimeout(function eventQTimeout(){
+			self.timeout = null;
 			if(self.counter !== null){
 				self.counter = null;
 				self.emit('ready', self.vals);
@@ -106,6 +107,9 @@ EventQ.prototype.done = function eventQ_done(val){
 	if(this.counter <= 0){
 		this.counter = null;
 		this.emit('ready', this.vals);
+		if(this.timeout !== undefined && this.timeout !== null){
+			clearTimeout(this.timeout);
+		}
 	}
 };
 
