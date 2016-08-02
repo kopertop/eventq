@@ -47,14 +47,21 @@ function EventQ(count, max_wait_time){
 	events.EventEmitter.call(this);
 	self.counter = count || 0;
 	self.vals = [];
-	if(max_wait_time){
+	// If we submit with a count of 0, emit that we're ready
+	if(count === 0){
+		setTimeout(function(){
+			self.emit('ready', self.vals);
+		}, 100);
+	} else if(max_wait_time){
 		self.timeout = setTimeout(function eventQTimeout(){
+			self.timeout = null;
 			if(self.counter !== null){
 				self.counter = null;
 				self.emit('ready', self.vals);
 			}
 		}, max_wait_time);
 	}
+
 }
 util.inherits(EventQ, events.EventEmitter);
 
@@ -100,6 +107,9 @@ EventQ.prototype.done = function eventQ_done(val){
 	if(this.counter <= 0){
 		this.counter = null;
 		this.emit('ready', this.vals);
+		if(this.timeout !== undefined && this.timeout !== null){
+			clearTimeout(this.timeout);
+		}
 	}
 };
 
